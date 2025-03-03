@@ -1,12 +1,12 @@
 body {
-    overflow: hidden;
+    overflow-y: auto;
     font-family: 'Montserrat', sans-serif;
     font-size: 24px;
     background: white;
 }
 
 canvas {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
