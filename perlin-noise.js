@@ -4,15 +4,16 @@ let cols, rows;
 let scl = 10; // Scale of the flow field
 let flowField;
 let particles = [];
+let numParticles = 100;
 
 class Particle {
     constructor() {
-        this.pos = createVector(random(width), random(height));
-        this.vel = createVector(0, 0);
-        this.acc = createVector(0, 0);
+        this.pos = createVector(random(width), random(height)); // Position
+        this.vel = createVector(0, 0); // Velocity
+        this.acc = createVector(0, 0); // Acceleration
         this.maxSpeed = 2;
-        this.trail = []; // Stores past positions for fading
-        this.trailLength = 80; // Controls trail fade duration
+        this.trail = [];
+        this.trailLength = 80;
     }
 
     applyForce(force) {
@@ -51,7 +52,7 @@ class Particle {
         noFill();
         for (let i = 0; i < this.trail.length; i++) {
             let alpha = map(i, 0, this.trail.length, 0, 255); // Gradual fade
-            stroke(173, 216, 230, alpha); // Light blue stroke
+            stroke(173, 216, 230, alpha);
             strokeWeight(5);
             point(this.trail[i].x, this.trail[i].y);
         }
@@ -64,14 +65,13 @@ function setup() {
     rows = floor(height / scl);
     flowField = new Array(cols * rows);
 
-    for (let i = 0; i < 100; i++) { // Number of particles
+    for (let i = 0; i < numParticles; i++) {
         particles.push(new Particle());
     }
 }
 
 function draw() {
-    // Semi-transparent white background for fading effect
-    background(255); // Adjust alpha (10 = slow fade, 50 = fast fade)
+    background(255);
 
     let yoff = 0;
     for (let y = 0; y < rows; y++) {
