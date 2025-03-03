@@ -12,7 +12,7 @@ class Particle {
         this.acc = createVector(0, 0);
         this.maxSpeed = 2;
         this.trail = []; // Stores past positions for fading
-        this.trailLength = 100; // Controls trail fade duration
+        this.trailLength = 80; // Controls trail fade duration
     }
 
     applyForce(force) {
@@ -52,7 +52,7 @@ class Particle {
         for (let i = 0; i < this.trail.length; i++) {
             let alpha = map(i, 0, this.trail.length, 0, 255); // Gradual fade
             stroke(173, 216, 230, alpha); // Light blue stroke
-            strokeWeight(2);
+            strokeWeight(5);
             point(this.trail[i].x, this.trail[i].y);
         }
     }
@@ -64,7 +64,7 @@ function setup() {
     rows = floor(height / scl);
     flowField = new Array(cols * rows);
 
-    for (let i = 0; i < 300; i++) { // Number of particles
+    for (let i = 0; i < 100; i++) { // Number of particles
         particles.push(new Particle());
     }
 }
@@ -97,4 +97,7 @@ function draw() {
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+    cols = floor(width / scl);
+    rows = floor(height / scl);
+    flowField = new Array(cols * rows);
 }
